@@ -3,49 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
+
 <style>
 body{
-  font-family:Arial;
-  text-align:center;
-  background:#111;
-  color:white;
-  margin-top:100px;
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    overflow:hidden;
 }
+
 button{
-  padding:20px 40px;
-  font-size:24px;
-  cursor:pointer;
+    padding:20px 40px;
+    font-size:25px;
+    cursor:pointer;
 }
-img{
-  display:none;
-  width:400px;
-  max-width:90%;
+
+#scare{
+    display:none;
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 </style>
 </head>
 <body>
 
-<h1>🎂 هابي بيرث دي سستر</h1>
-<button onclick="prank()"> 🎁 فتحي الهديه </button>
+<h1>🎂 عندي مفاجأة عيد ميلاد لك</h1>
+<button onclick="start()">افتح الهدية 🎁</button>
 
-<br><br>
+<img id="scare"
+src="https://i.imgur.com/5M0m7wB.jpeg">
 
-<img id="meme"
-src="https://i.imgur.com/8Km9tLL.jpeg">
-
-<h2 id="msg"></h2>
-
-<audio id="sound"
-src="https://www.soundjay.com/human/sounds/scream-01.mp3">
+<audio id="sound">
+<source src="https://www.myinstants.com/media/sounds/scream.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function prank(){
-  document.body.style.background="red";
-  document.getElementById("meme").style.display="block";
-  document.getElementById("msg").innerHTML=
-  "وييييوووو";
-  document.getElementById("sound").play();
+function start(){
+
+    document.body.innerHTML =
+    "<h1>جاري تحميل الهدية... 🎁</h1>";
+
+    setTimeout(function(){
+
+        document.body.innerHTML =
+        '<img id="scare" src="https://i.imgur.com/5M0m7wB.jpeg" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;">';
+
+        let audio = new Audio("https://www.myinstants.com/media/sounds/scream.mp3");
+        audio.volume = 1;
+        audio.play();
+
+        setInterval(()=>{
+            document.body.style.transform =
+            `translate(${Math.random()*30-15}px,${Math.random()*30-15}px)`;
+        },50);
+
+    },4000);
 }
 </script>
 
